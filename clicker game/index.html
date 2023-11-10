@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Clicker Game</title>
+</head>
+<body>
+    <div id="container">
+        <div id="score">Clicks: <span id="Clicks">0</span></div>
+        <div id="multiplier">Multiplier: <span id="multiplierValue">1</span></div>
+        <div id="smiley" onclick="increaseScore()">😊</div>
+        <button onclick="buyUpgrade()">Buy Upgrade (Cost: <span id="upgradeCost">10</span>)</button>
+    </div>
+
+<script>
+let score = 0;
+let multiplier = 1;
+let upgradeCount = 0;
+let upgradeCost = 10;
+
+function increaseScore() {
+    score += multiplier;
+    document.getElementById("Clicks").innerText = score;
+}
+
+function buyUpgrade() {
+    if (score >= upgradeCost) {
+        score -= upgradeCost;
+        multiplier++;
+        upgradeCount++;
+        upgradeCost = Math.ceil(upgradeCost * 1.5);
+        updateUI();
+    } else {
+        alert("Not enough to buy the upgrade!");
+    }
+}
+
+function updateUI() {
+    document.getElementById("Clicks").innerText = score;
+    document.getElementById("multiplierValue").innerText = multiplier;
+    document.getElementById("upgradeCount").innerText = upgradeCount;
+    document.getElementById("upgradeCost").innerText = upgradeCost;
+}
+
+</script>
+
+<style>
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#container {
+    text-align: center;
+}
+
+#score, #multiplier, #upgrades {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#smiley {
+    font-size: 50px;
+    cursor: pointer;
+    user-select: none;
+}
+
+button {
+    margin-top: 10px;
+    font-size: 16px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+</style>
+</body>
+</html>
